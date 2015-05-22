@@ -1,0 +1,14 @@
+{
+  "name": "DGroups",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-connect": "^0.7.1",
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-includes": "~0.4.5"
+  }
+}

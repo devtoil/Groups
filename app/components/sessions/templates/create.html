@@ -1,0 +1,30 @@
+<div class="md-padding">
+  <form name="sessionForm">
+    <md-input-container>
+      <label>Title</label>
+      <input name="title" type="text" ng-model="sessions.newSession.title">
+    </md-input-container>
+    <md-input-container>
+      <label>Start Date</label>
+      <input name="startDate" type="date" ng-model="sessions.newSession.startDate">
+    </md-input-container>
+    <md-input-container>
+      <label>End Date</label>
+      <input name="endDate" type="date" ng-model="sessions.newSession.endDate">
+    </md-input-container>
+    <md-input-container>
+      <label>Password</label>
+      <input name="password" ng-model="sessions.newSession.password">
+    </md-input-container>
+    <md-input-container>
+      <md-switch ng-model="sessions.newSession.requiresPassword">Password Required</md-switch>
+    </md-input-container>
+    <md-input-container>
+      <md-switch ng-model="sessions.newSession.visible">Visible</md-switch>
+    </md-input-container>
+    <md-input-container>
+      <md-switch ng-model="sessions.newSession.active">Active</md-switch>
+    </md-input-container>
+    <md-button class="md-raised md-primary" ng-click="sessions.addSession()">Add</md-button>
+  </form>
+</div>

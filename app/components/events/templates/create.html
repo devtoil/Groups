@@ -1,0 +1,16 @@
+<form name="eventForm">
+	<md-input-container>
+	  <label>Title</label>
+	  <input name="title" type="text" ng-model="event.title">
+	</md-input-container>
+	<md-input-container>
+	  <label>Content</label>
+	  <textarea name="content" type="text" ng-model="event.content"></textarea>
+	</md-input-container>
+	<md-input-container>
+	  <md-switch ng-model="event.visible">Visible</md-switch>
+	</md-input-container>
+	<md-input-container>
+	  <md-switch ng-model="event.active">Active</md-switch>
+	</md-input-container>
+</form>

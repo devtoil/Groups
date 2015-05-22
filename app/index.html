@@ -1,0 +1,39 @@
+<html lang="en" ng-app="groups" ng-controller="AppController">
+  
+  <head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+  </head>
+  
+  <body layout="column">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <span>D-Group Admin</span>
+        <span flex></span>
+        <md-button ui-sref="sessions.list">Sessions</md-button>
+        <md-button ui-sref="users.list">Users</md-button>
+        <md-button>Menu</md-button>
+      </div>
+    </md-toolbar>
+    
+    <!--main app view-->
+    <ui-view layout="column" flex></ui-view>
+    
+    <!-- Angular Material Dependencies -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-aria.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js"></script>
+    <script src="../bower_components/lodash/lodash.min.js"></script>
+    <script src="../bower_components/restangular/dist/restangular.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./components/sessions/sessions.js"></script>
+    <script src="./components/sessions/services.js"></script>
+    <script src="./components/events/services.js"></script>
+  	<script src="./components/users/users.js"></script>
+    <script src="./components/users/services.js"></script>
+  </body>
+
+</html>
