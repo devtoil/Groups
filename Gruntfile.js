@@ -18,13 +18,13 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-       options: {
+      options: {
         livereload: true
-       },
-       html: {
-          files: ['*.html', 'includes/**/*.html', 'includes/modules/**/*.html'],
-          tasks: ['includes']
-       },
+      },
+      html: {
+        files: ['*.html', 'includes/**/*.html', 'includes/modules/**/*.html'],
+        tasks: ['includes']
+      },
       js: {
         files: 'build/assets/js/**/*.js'
       },
