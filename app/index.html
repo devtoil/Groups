@@ -1,41 +1,51 @@
 <html lang="en" ng-app="groups" ng-controller="AppController">
   
   <head>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   
   <body layout="column">
-    <md-toolbar>
+    <md-toolbar class="md-accent">
       <div class="md-toolbar-tools">
         <span>Groups</span>
         <span flex></span>
-        <md-button ui-sref="sessions.list">Sessions</md-button>
         <md-button ui-sref="users.list">Users</md-button>
+        <md-button ui-sref="series.list">Series</md-button>
+        <md-button ui-sref="resources.list">Resources</md-button>
         <md-button>Menu</md-button>
       </div>
     </md-toolbar>
     
     <!--main app view-->
     <ui-view layout="column" flex></ui-view>
-    
+    <md-button  class="md-fab md-accent" ng-show="isLoading" style="position: absolute; bottom: 16px; right: 16px;">
+      <md-icon>more_horiz</md-icon>
+    </md-button>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <!-- Angular Material Dependencies -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.6/angular-sanitize.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.6/angular-animate.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-aria.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angular_material/0.9.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.14/angular-ui-router.min.js"></script>
     <script src="../bower_components/lodash/lodash.min.js"></script>
     <script src="../bower_components/restangular/dist/restangular.min.js"></script>
     <script src="./app.js"></script>
-    <script src="./components/sessions/sessions.js"></script>
-    <script src="./components/sessions/services.js"></script>
+    <script src="./js/directives.js"></script>
+    <script src="./js/services.js"></script>
+    <script src="./components/series/series.js"></script>
+    <script src="./components/series/services.js"></script>
     <script src="./components/events/services.js"></script>
   	<script src="./components/users/users.js"></script>
     <script src="./components/users/services.js"></script>
     
     <script src="./components/home/home.js"></script>
+    <script src="./components/resources/resources.js"></script>
   </body>
 
 </html>

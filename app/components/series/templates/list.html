@@ -1,0 +1,18 @@
+<div layout="row">
+  <div flex="80" offset="10" layout="column" class="md-padding">
+      <h1 flex>My Series</h1>
+      <md-content flex  class="md-whiteframe-z1">
+        <md-list>
+          <md-list-item class="md-3-line" ng-repeat="series in seriesList.series" ng-click="seriesList.goToSeries(series)">
+            <p ng-bind="series.title"></p>
+            <md-divider></md-divider>
+          </md-list-item>
+        </md-list> 
+      </md-content>
+  </div>
+</div>
+<md-button  class="md-fab md-accent" style="position: absolute; bottom: 16px; right: 16px;">
+  <a ui-sref="series.create">
+    <md-icon>add</md-icon>
+  </a>
+</md-button>

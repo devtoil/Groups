@@ -1,7 +1,5 @@
 angular.module('groups')
 
-.factory('Sessions', ['Restangular', SessionService])
-
 .directive('dateFormatter', function(){
 	return {
 		require: '^ngModel',
@@ -11,11 +9,6 @@ angular.module('groups')
 		}
 	}
 })
-
-function SessionService(Restangular){
-	return Restangular.service('sessions');
-}
-
 
 
 

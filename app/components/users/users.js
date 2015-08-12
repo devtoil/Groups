@@ -1,7 +1,7 @@
 angular.module('groups')
 
-.controller('UserListController', ['UsersService', '$state', UserListController])
-.controller('UserController', ['UsersService', 'EventsService', '$stateParams', UserDetailController])
+.controller('UserListController', ['UsersService', '$state', '$scope', UserListController])
+.controller('UserEditController', ['UsersService', '$state', '$scope', '$timeout', 'Loader', UserEditController])
 
 .config(function($stateProvider){
 	$stateProvider
@@ -17,14 +17,14 @@ angular.module('groups')
 	})
 	.state('users.create', {
 		url: '/create',
-		templateUrl: 'components/users/create.html',
-		controller: UserCreateController,
-		controller: 'userCreate',
+		templateUrl: 'components/users/templates/form.html',
+		controller: 'UserEditController',
+		controllerAs: 'userDetail',
 	})
 	.state('users.detail', {
 		url: '/:id',
-		templateUrl: 'components/users/templates/detail.html',
-		controller: UserDetailController,
+		templateUrl: 'components/users/templates/form.html',
+		controller: 'UserEditController',
 		controllerAs: 'userDetail'
 	})
 })
@@ -42,24 +42,25 @@ angular.module('groups')
 	vm.newSession = defaultSession;
 	
 */
-function UserListController(UsersService, $state){
+function UserListController(UsersService, $state, $scope){
 	var vm = this;
 	
 	init();
 
 	vm.goToUser = function(user){
-		$state.go('user.detail', {id: user.id});
+		$state.go('users.detail', {id: user.id});
 	};
 
 	function init(){
-		UsersService.getUsers()
-		.then(function(response){
-			vm.users = response.data;
+		$scope.$watchCollection(function(){
+		 return	UsersService.users();
+		}, function(response){
+			vm.users = response;
 		});
 	}
 }
 
-function UserCreateController(UsersService, $state){
+function UserEditController(UsersService, $state, $scope, $timeout, Loader){
 	var vm = this;
 	
 	init();
@@ -71,14 +72,53 @@ function UserCreateController(UsersService, $state){
 	};
 	
 	function addUser(){
-		UsersService.createUser(vm.user).then(function(response){
-			init();
+		UsersService.saveUser(vm.user).then(function(response){
 			vm.user = {};
+			init();
 		});
 	}
 
 	function init(){
+		if($state.params.id) {
+			UsersService
+				.getUser($state.params.id)
+				.then(function(response){
+					vm.user = response.data;
+				});
+				
+			$scope.$watch(function(){
+				return vm.user;
+			}, updateUser, true);
+		}
+	}
+	
+	var saveTimeout, first = true;
+	function updateUser(user, oldUser) {
+		if (!user || !user.id) { 
+			return;
+		}
 		
+		if (user == oldUser) {
+			return;
+		}
+		
+		if (first) {
+			first = false;
+			return;
+		}
+		
+		if (saveTimeout) {
+			$timeout.cancel(saveTimeout);
+		}
+
+		saveTimeout = $timeout(function(){
+			Loader.start();
+			UsersService
+				.saveUser(user)
+				.then(function(){
+					Loader.end();
+				});
+		}, 300);
 	}
 }
 

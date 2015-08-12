@@ -3,14 +3,21 @@
 	  <label>Title</label>
 	  <input name="title" type="text" ng-model="event.title">
 	</md-input-container>
-	<md-input-container>
-	  <label>Content</label>
-	  <textarea name="content" type="text" ng-model="event.content"></textarea>
+	<!--<md-input-container>
+		<label>Start</label>
+	  <input type="date" ng-model="event.startTime">
 	</md-input-container>
+	<md-input-container>
+		<label>End</label>
+	  <input type="date" ng-model="event.endTime">
+	</md-input-container>-->
 	<md-input-container>
 	  <md-switch ng-model="event.visible">Visible</md-switch>
 	</md-input-container>
-	<md-input-container>
-	  <md-switch ng-model="event.active">Active</md-switch>
-	</md-input-container>
+	
+	<h2>Resources</h2>
+	<md-checkbox ng-repeat="resource in resources" ng-model="resource.checked">
+		{{resource.title}}
+	</md-checkbox>
+	<md-button class="md-raised md-accent" ng-click="addEvent()">Add</md-button>
 </form>

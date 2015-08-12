@@ -23,13 +23,5 @@ angular.module('groups')
 		.then(function(org){
 			console.log(org)
 			vm.org = org;
-			
-			// org
-			// 	.all('resources')
-			// 	.getList()
-			// 	.then(function(resources){
-			// 		console.log(resources);
-			// 	})
-			// 	.catch(function(){})
 		})
 })

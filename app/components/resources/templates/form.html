@@ -1,0 +1,14 @@
+<div class="md-padding">
+  <h2>New Resource</h2>  
+  <form name="resourceForm">
+    <md-input-container>
+      <label>Title</label>
+      <input name="title" type="text" ng-model="resourceDetail.resource.title">
+    </md-input-container>
+     <md-input-container>
+      <label>Body</label>
+      <textarea name="body" type="text" ng-model="resourceDetail.resource.body"></textarea>
+    </md-input-container>
+    <md-button class="md-raised md-accent" ng-click="resourceDetail.onClickAdd()">Create Resource</md-button>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<div layout="row">
+  <div flex="80" offset="10" layout="row">
+    <md-list flex="25" class="md-whiteframe-z1" window-scroll>
+      <md-subheader class="md-no-sticky">Resources</md-subheader>
+      <md-list-item class="md-3-line" ng-repeat="resource in resourceList.resources" ng-click="resourceList.goToResource(resource)">
+        <p ng-bind="resource.title"></p>
+        <md-divider></md-divider>
+      </md-list-item>
+    </md-list> 
+    <div layout="column" flex>
+      <ui-view></ui-view>
+      <md-button  class="md-fab md-accent" style="position: absolute; bottom: 16px; right: 16px;">
+        <a ui-sref="resources.create">
+          <md-icon>add</md-icon>
+        </a>
+      </md-button>
+    </div> 
+  </div>
+</div>
