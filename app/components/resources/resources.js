@@ -5,12 +5,13 @@ angular.module('groups')
 	.state('resources', {
 		abstract: true,
 		url: '/resources',
-		templateUrl: 'components/resources/templates/main.html',
-		controller: 'ResourceListController',
-		controllerAs: 'resourceList'
+		template: '<ui-view></ui-view>'
 	})
 	.state('resources.list', {
 		url: '',
+		templateUrl: 'components/resources/templates/main.html',
+		controller: 'ResourceListController',
+		controllerAs: 'resourceList'
 	})
 	.state('resources.create', {
 		url: '/create',
@@ -49,8 +50,13 @@ angular.module('groups')
 	if($state.params.id) {
 		ResourceService.one($state.params.id).get().then(function(response){
 			vm.resource = response;
-		})
+		});
 	}
+	
+	vm.updateResource = function(){
+		vm.resource.save();
+	}
+	
 	vm.onClickAdd = function(){
 		OrganizationService
 			.one(1)

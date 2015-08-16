@@ -1,37 +1,53 @@
-<div class="md-padding">
-  <form name="userForm">
-    
-    <!--<label>Created</label>
-    <p>{{userDetail.user.createdAt | date : 'short'}}</p>
-    
-    <label>Updated</label>
-    <p>{{userDetail.user.updatedAt | date : 'short'}}</p>-->
-    
-    <md-input-container>
-      <label>First Name</label>
-      <input name="firstName" type="text" ng-model="userDetail.user.firstName">
-    </md-input-container>
-    
-    <md-input-container>
-      <label>Last Name</label>
-      <input name="lastName" type="text" ng-model="userDetail.user.lastName">
-    </md-input-container>
-    
-		<md-input-container>
-      <label>Password</label>
-      <input name="password" ng-model="userDetail.user.password">
-    </md-input-container>
-		
-    <md-input-container>
-      <label>Phone</label>
-      <input name="phoneNumber" type="text" ng-model="userDetail.user.phoneNumber">
-    </md-input-container>
-		
-		<md-input-container>
-      <label>Email</label>
-      <input name="email" type="text" ng-model="userDetail.user.email">
-    </md-input-container>
-   
-    <md-button class="md-raised md-accent" ng-click="userDetail.addUser()" ng-show="!userDetail.user.id">Add</md-button>
-  </form>
+<div layout="row">
+  <div flex="80" offset="10">
+    <h1>{{userDetail.user.firstName}}</h1>
+    <md-content class="md-padding">     
+      <div layout="row">
+        <div flex>
+          <form name="userForm">
+          
+          <!--<label>Created</label>
+          <p>{{userDetail.user.createdAt | date : 'short'}}</p>
+          
+          <label>Updated</label>
+          <p>{{userDetail.user.updatedAt | date : 'short'}}</p>-->
+          
+          <md-input-container>
+            <label>First Name</label>
+            <input name="firstName" type="text" ng-model="userDetail.user.firstName">
+          </md-input-container>
+          
+          <md-input-container>
+            <label>Last Name</label>
+            <input name="lastName" type="text" ng-model="userDetail.user.lastName">
+          </md-input-container>
+          
+      		<md-input-container>
+            <label>Password</label>
+            <input name="password" ng-model="userDetail.user.password">
+          </md-input-container>
+      		
+          <md-input-container>
+            <label>Phone</label>
+            <input name="phoneNumber" type="text" ng-model="userDetail.user.phoneNumber">
+          </md-input-container>
+      		
+      		<md-input-container>
+            <label>Email</label>
+            <input name="email" type="text" ng-model="userDetail.user.email">
+          </md-input-container>
+         
+          <md-button class="md-raised md-accent" ng-click="userDetail.addUser()" ng-show="!userDetail.user.id">Add</md-button>
+        </form>
+        </div>
+        <div flex class="md-padding md-whiteframe-z2">
+          <h2>User's Series</h2>
+          <md-checkbox ng-repeat="series in userDetail.series track by series.id" ng-change="userDetail.toggleSeries(series)" ng-model="series.checked">
+        		{{series.title}}
+        	</md-checkbox>
+        </div>
+      </div>  
+ 
+    </md-content>  
+  </div>
 </div>

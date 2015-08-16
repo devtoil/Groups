@@ -16,8 +16,8 @@
 	</md-input-container>
 	
 	<h2>Resources</h2>
-	<md-checkbox ng-repeat="resource in resources" ng-model="resource.checked">
+	<md-checkbox ng-repeat="resource in resources | orderBy : 'id'" ng-change="onResourceChange(resource)" ng-model="resource.checked">
 		{{resource.title}}
 	</md-checkbox>
-	<md-button class="md-raised md-accent" ng-click="addEvent()">Add</md-button>
+	<md-button class="md-raised md-accent" ng-click="addEvent()" ng-show="!event.id">Add</md-button>
 </form>

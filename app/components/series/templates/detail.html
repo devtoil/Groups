@@ -4,66 +4,74 @@
   </a>
 </md-button>
 
-<md-tabs md-dynamic-height md-border-bottom>
-  <md-tab label="Series Events" >
-  	<div layout="row" flex ng-show="seriesDetail.series.Events">
-      <div flex layout="column" class="md-whiteframe-z1">
-        <md-list>
-            <md-list-item class="md-3-line" ng-repeat="event in seriesDetail.series.Events" ng-click="seriesDetail.currentEvent = event">
-              <div class="md-list-item-text">
-                <h3 ng-bind="event.title"></h3>
-                <h4>
-                  <span ng-bind="event.createdAt | date : 'shortDate'"></span>
-                </h4>
-              </div>
-              <md-divider></md-divider>
-            </md-list-item>
-          </md-list>
-      </div>
-      <md-content flex class="md-padding md-whiteframe-z1">
-        <event-form def="seriesDetail.currentEvent" resources="seriesDetail.resources"></event-form>
-     </md-content>
-    </div>
-  </md-tab>
-  <md-tab label="Series Details">
-    <md-content class="md-padding">
-      <form name="seriesDetail.seriesForm">
-        <md-input-container>
-          <label>Title</label>
-          <input name="title" type="text" ng-model="seriesDetail.series.title">
-        </md-input-container>
-<!--        <md-input-container>
-          <label>Start Date</label>
-          <input name="startDate" type="date" date-formatter ng-model="seriesDetail.series.startDate">
-        </md-input-container>
-        <md-input-container>
-          <label>End Date</label>
-          <input name="endDate" type="date" date-formatter ng-model="seriesDetail.series.endDate">
-        </md-input-container>-->
-        <md-input-container>
-          <label>Password</label>
-          <input name="password" ng-model="seriesDetail.series.password">
-        </md-input-container>
-        <md-input-container>
-          <md-switch ng-model="seriesDetail.series.requiresPassword">Password Required</md-switch>
-        </md-input-container>
-        <md-input-container>
-          <md-switch ng-model="seriesDetail.series.visible">Visible</md-switch>
-        </md-input-container>
-        <md-input-container>
-          <md-switch ng-model="seriesDetail.series.active">Active</md-switch>
-        </md-input-container>
-      </form>
-    </md-content>
-  </md-tab>
-  <md-tab label="Add Event">
-     <div class="md-padding">
-       <md-content class="md-padding">
-          <event-form def="seriesDetail.newEvent" on-click-add="seriesDetail.addEvent" resources="seriesDetail.resources"></event-form>
+<div layout="row">
+  <div flex="80" offset="10">
+    
+    <h1>{{seriesDetail.series.title}}</h1>
+    <md-tabs md-dynamic-height md-border-bottom class="md-whiteframe-z1">
+      <md-tab label="Series Events" >
+      	<div layout="row" flex ng-show="seriesDetail.series.Events">
+          <div flex layout="column" class="md-whiteframe-z1">
+            <md-content>
+              <md-list>
+                <md-list-item class="md-3-line" ng-repeat="event in seriesDetail.series.Events" ng-click="seriesDetail.currentEvent = event">
+                  <div class="md-list-item-text">
+                    <h3 ng-bind="event.title"></h3>
+                    <h4>
+                      <span ng-bind="event.createdAt | date : 'shortDate'"></span>
+                    </h4>
+                    <md-icon class="md-secondary" ng-show="seriesDetail.currentEvent == event">arrow_forward</md-icon>
+                  </div>
+                </md-list-item>
+              </md-list>
+            </md-content>
+            
+          </div>
+          <md-content flex class="md-padding md-whiteframe-z1">
+            <event-form def="seriesDetail.currentEvent" on-resource-change="seriesDetail.toggleResource" resources="seriesDetail.resources"></event-form>
+         </md-content>
+        </div>
+      </md-tab>
+      <md-tab label="Series Details">
+        <md-content class="md-padding">
+          <form name="seriesDetail.seriesForm">
+            <md-input-container>
+              <label>Title</label>
+              <input name="title" type="text" ng-model="seriesDetail.series.title">
+            </md-input-container>
+            <md-input-container>
+              <label>Start Date</label>
+              <input name="startDate" type="date" date-formatter ng-model="seriesDetail.series.startDate">
+            </md-input-container>
+            <md-input-container>
+              <label>End Date</label>
+              <input name="endDate" type="date" date-formatter ng-model="seriesDetail.series.endDate">
+            </md-input-container>
+            <md-input-container>
+              <label>Password</label>
+              <input name="password" ng-model="seriesDetail.series.password">
+            </md-input-container>
+            <md-input-container>
+              <md-switch ng-model="seriesDetail.series.requiresPassword">Password Required</md-switch>
+            </md-input-container>
+            <md-input-container>
+              <md-switch ng-model="seriesDetail.series.visible">Visible</md-switch>
+            </md-input-container>
+            <md-input-container>
+              <md-switch ng-model="seriesDetail.series.active">Active</md-switch>
+            </md-input-container>
+          </form>
+          <md-button class="md-raised md-accent" ng-click="seriesDetail.saveSeries()" ng-show="seriesDetail.series.id">Save</md-button>
         </md-content>
-     </div>
-  </md-tab>
-  </md-tabs>
+      </md-tab>
+      <md-tab label="Add Event">
+         <md-content class="md-padding">
+            <event-form def="seriesDetail.newEvent" on-click-add="seriesDetail.addEvent" resources="seriesDetail.resources"></event-form>
+          </md-content>
+      </md-tab>
+      </md-tabs>
   
   
   
+  </div>
+</div>

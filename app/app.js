@@ -1,4 +1,4 @@
-angular.module('groups', ['ngMaterial', 'ui.router', 'restangular', 'ngSanitize'])
+angular.module('groups', ['ngMaterial', 'ui.router', 'restangular', 'textAngular'])
 
 .controller('AppController', ['$scope', 'Loader', AppController])
 

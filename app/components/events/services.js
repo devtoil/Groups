@@ -7,7 +7,8 @@ angular.module('groups')
       event: '=def',
       addEvent: '=onClickAdd',
       resources: '=',
-      selectedResources: '='
+      selectedResources: '=',
+      onResourceChange: '='
     },
     controller: function($scope){
        

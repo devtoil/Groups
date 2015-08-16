@@ -7,8 +7,30 @@ angular.module('groups')
 	return Restangular.service('organizations');
 })
 .factory('EventService', function(Restangular){
-	return Restangular.service('events');
+	var service = Restangular.service('events');
+	return {
+		getService: function() {
+			return service;
+		},
+		addResource: function(eventId, resource){
+			return service
+							.one(eventId)
+							.all('resources')
+							.post(resource);
+		},
+		removeResource: function(eventId, resourceId){
+			return service
+							.one(eventId)
+							.one('resources', resourceId)
+							.remove();
+		}
+	} 
 })
 .factory('SeriesService', function(Restangular){
-	return Restangular.service('series');
+	var service = Restangular.service('series');
+	return {
+		getService: function() {
+			return service;
+		}
+	} 
 })

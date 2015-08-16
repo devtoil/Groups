@@ -1,7 +1,7 @@
 angular.module('groups')
 
 .controller('UserListController', ['UsersService', '$state', '$scope', UserListController])
-.controller('UserEditController', ['UsersService', '$state', '$scope', '$timeout', 'Loader', UserEditController])
+.controller('UserEditController', ['UsersService', '$state', '$scope', '$timeout', 'Loader', 'SeriesService', UserEditController])
 
 .config(function($stateProvider){
 	$stateProvider
@@ -9,11 +9,12 @@ angular.module('groups')
 		abstract: true,
 		url: '/users',
 		templateUrl: 'components/users/templates/main.html',
-		controller: 'UserListController',
-		controllerAs: 'userList'
 	})
 	.state('users.list', {
 		url: '',
+		templateUrl: 'components/users/templates/list.html',
+		controller: 'UserListController',
+		controllerAs: 'userList'
 	})
 	.state('users.create', {
 		url: '/create',
@@ -42,7 +43,7 @@ angular.module('groups')
 	vm.newSession = defaultSession;
 	
 */
-function UserListController(UsersService, $state, $scope){
+function UserListController(UsersService, $state, $scope, SeriesService){
 	var vm = this;
 	
 	init();
@@ -60,7 +61,7 @@ function UserListController(UsersService, $state, $scope){
 	}
 }
 
-function UserEditController(UsersService, $state, $scope, $timeout, Loader){
+function UserEditController(UsersService, $state, $scope, $timeout, Loader, SeriesService){
 	var vm = this;
 	
 	init();
@@ -70,6 +71,40 @@ function UserEditController(UsersService, $state, $scope, $timeout, Loader){
 	vm.goToUser = function(user){
 		$state.go('user.detail', {id: user.id});
 	};
+	
+	vm.toggleSeries = function(series){
+		if(!vm.series) {
+			return;
+		}
+		
+		var arr = _.where(vm.user.Series, {id: series.id});
+		if(arr.length) {
+			UsersService
+				.removeSeries(vm.user.id, series.id)
+				.then(init);
+		} else {
+			UsersService
+				.addSeries(vm.user.id, series)
+				.then(init);	
+		}
+	}
+	
+	function updateSeries(){
+		angular.forEach(vm.series, function(val){
+			val.checked = false;
+		});
+		
+		if(!vm.user || !vm.user.Series) {
+			return; 
+		}
+		
+		angular.forEach(vm.user.Series, function(val){
+			var arr = _.where(vm.series, {id: val.id});
+			if(arr.length) {
+				arr[0].checked = true;
+			}
+		});
+	}
 	
 	function addUser(){
 		UsersService.saveUser(vm.user).then(function(response){
@@ -84,11 +119,19 @@ function UserEditController(UsersService, $state, $scope, $timeout, Loader){
 				.getUser($state.params.id)
 				.then(function(response){
 					vm.user = response.data;
+					updateSeries()
 				});
 				
 			$scope.$watch(function(){
 				return vm.user;
 			}, updateUser, true);
+			
+			SeriesService.getService().getList()
+			.then(function(response){
+				vm.series = response;
+				
+				updateSeries();
+			});
 		}
 	}
 	

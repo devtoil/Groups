@@ -1,11 +1,10 @@
 <div layout="row">
-  <div flex="80" offset="10" layout="column" class="md-padding">
+  <div flex="80" offset="10" layout="column">
       <h1 flex>My Series</h1>
       <md-content flex  class="md-whiteframe-z1">
         <md-list>
           <md-list-item class="md-3-line" ng-repeat="series in seriesList.series" ng-click="seriesList.goToSeries(series)">
-            <p ng-bind="series.title"></p>
-            <md-divider></md-divider>
+            <p>{{series.title}} &nbsp;&nbsp;&nbsp;{{series.startDate | date : 'MM/dd'}} - {{series.endDate | date : 'MM/dd'}} </p>
           </md-list-item>
         </md-list> 
       </md-content>

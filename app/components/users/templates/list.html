@@ -1,0 +1,13 @@
+<div layout="row">
+  <div flex="80" offset="10" layout="column">
+    <h1 flex>My Users</h1>
+    <md-content flex  class="md-whiteframe-z1">
+        <md-list>
+        <md-list-item class="md-3-line" ng-repeat="user in userList.users | orderBy : '-createdAt'" ng-click="userList.goToUser(user)">
+          <p>{{user.firstName + ' ' + user.lastName}}</p>
+          <!--<md-divider></md-divider>-->
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </div>
+</div>

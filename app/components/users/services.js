@@ -14,7 +14,9 @@ function UsersService($http){
 		getUser: getUser,
 		getUsers: getUsers,
 		saveUser: saveUser,
-		getList: getList
+		getList: getList,
+		addSeries: addSeries,
+		removeSeries: removeSeries
 	};
 	
 	function init() {
@@ -50,5 +52,21 @@ function UsersService($http){
 									return response.data;
 								})
 		}
+	}
+	
+	function addSeries(userId, series){
+		return $http
+						.post(base + '/users/' + userId + '/series', series)
+						.then(function(response){
+							return response.data;
+						});
+	}
+	
+	function removeSeries(userId, seriesId){
+		return $http
+						.delete(base + '/users/' + userId + '/series/' + seriesId)
+						.then(function(response){
+							return response.data;
+						});
 	}
 }
